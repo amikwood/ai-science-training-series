@@ -1,0 +1,585 @@
+(2024-08-08) (2024-08-08/base) [awood@sophia-gpu-17 wordplay]$ mpirun -n "${NGPUS}" python3 -m wordplay \
+    train.backend=DDP \
+    train.eval_interval=100 \
+    data=shakespeare \
+    train.dtype=bf16 \
+    model.batch_size=64 \
+    model.block_size=1024 \
+    train.max_iters=1000 \
+    train.log_interval=10 \
+    train.compile=false
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[LOG_CAT_ML] component basesmuma is not available but requested in hierarchy: basesmuma,basesmuma,ucx_p2p:basesmsocket,basesmuma,p2p
+[LOG_CAT_ML] ml_discover_hierarchy exited with error
+[2024-11-19 22:48:36.475016][INFO][configs.py:81] - Setting HF_DATASETS_CACHE to /home/awood/wordplay/.cache/huggingface/datasets
+[2024-11-19 22:48:37.729234][INFO][dist.py:92] - 
+
+[dist_info]:
+  • DEVICE=cuda
+  • DEVICE_ID=cuda:0
+  • DISTRIBUTED_BACKEND=nccl
+  • GPUS_PER_NODE=8
+  • HOSTS=['sophia-gpu-17.lab.alcf.anl.gov']
+  • HOSTFILE=/var/spool/pbs/aux/37759.sophia-pbs-01.lab.alcf.anl.gov
+  • HOSTNAME=sophia-gpu-17.lab.alcf.anl.gov
+  • LOCAL_RANK=0
+  • MACHINE=Sophia
+  • NUM_NODES=1
+  • NGPUS=8
+  • NGPUS_AVAILABLE=8
+  • NODE_ID=0
+  • RANK=0
+  • SCHEDULER=LOCAL
+  • WORLD_SIZE_TOTAL=8
+  • WORLD_SIZE_IN_USE=8
+  • LAUNCH_CMD=None
+
+
+[2024-11-19 22:48:37.732069][INFO][dist.py:728] - [0/8] Using device='cuda' with backend='DDP' + 'nccl' for distributed training.
+[2024-11-19 22:48:37.734354][INFO][dist.py:348] - [device='cuda'][rank=0/7][local_rank=0/7][node=0/0]
+[2024-11-19 22:48:37.734932][WARNING][dist.py:352] - Using [8 / 8] available "cuda" devices !!
+[2024-11-19 22:48:39.036863][INFO][dist.py:348] - [device='cuda'][rank=5/7][local_rank=5/7][node=0/0]
+[2024-11-19 22:48:39.055243][INFO][dist.py:348] - [device='cuda'][rank=3/7][local_rank=3/7][node=0/0]
+[2024-11-19 22:48:39.083137][INFO][dist.py:348] - [device='cuda'][rank=7/7][local_rank=7/7][node=0/0]
+[2024-11-19 22:48:39.109906][INFO][dist.py:348] - [device='cuda'][rank=2/7][local_rank=2/7][node=0/0]
+[2024-11-19 22:48:39.127295][INFO][dist.py:348] - [device='cuda'][rank=1/7][local_rank=1/7][node=0/0]
+[2024-11-19 22:48:39.157002][INFO][dist.py:348] - [device='cuda'][rank=4/7][local_rank=4/7][node=0/0]
+[2024-11-19 22:48:39.173724][INFO][dist.py:348] - [device='cuda'][rank=6/7][local_rank=6/7][node=0/0]
+[2024-11-19 22:48:42.499303][INFO][configs.py:317] - Loading train from /home/awood/wordplay/data/shakespeare_char/train.bin
+[2024-11-19 22:48:42.502416][INFO][configs.py:317] - Loading val from /home/awood/wordplay/data/shakespeare_char/val.bin
+[2024-11-19 22:48:42.504128][INFO][configs.py:442] - Tokens per iteration: 524,288
+[2024-11-19 22:48:42.504752][INFO][configs.py:465] - Using self.ptdtype=torch.float16 on self.device_type='cuda'
+[2024-11-19 22:48:42.505217][INFO][configs.py:471] - Initializing a new model from scratch
+[2024-11-19 22:48:42.506222][INFO][dist.py:882] - Setting up wandb from rank: 0
+[2024-11-19 22:48:42.506635][INFO][dist.py:883] - Using: WB PROJECT: WordPlay
+wandb: Tracking run with wandb version 0.17.6
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+[2024-11-19 22:48:44.803846][CRITICAL][trainer.py:318] - "devid='cuda:4'"
+[2024-11-19 22:48:44.804239][CRITICAL][trainer.py:318] - "devid='cuda:1'"
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+[2024-11-19 22:48:44.807654][CRITICAL][trainer.py:318] - "devid='cuda:6'"
+[2024-11-19 22:48:44.808307][CRITICAL][trainer.py:318] - "devid='cuda:3'"
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+[2024-11-19 22:48:44.809255][CRITICAL][trainer.py:318] - "devid='cuda:2'"
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+[2024-11-19 22:48:44.826329][CRITICAL][trainer.py:318] - "devid='cuda:7'"
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+[2024-11-19 22:48:44.831324][CRITICAL][trainer.py:318] - "devid='cuda:5'"
+wandb: WARNING URL not available in offline run
+[2024-11-19 22:48:45.039782][INFO][dist.py:908] - W&B RUN: [](None)
+[2024-11-19 22:48:45.044439][INFO][dist.py:304] - Updating wandb.run:  config with "DIST_INFO"
+[2024-11-19 22:48:45.049047][INFO][dist.py:936] - Running on machine='Sophia'
+[2024-11-19 22:48:45.050621][WARNING][__main__.py:93] - {
+    "train": {
+        "framework": "pytorch",
+        "backend": "DDP",
+        "device": null,
+        "seed": null,
+        "port": null,
+        "ds_config_path": null,
+        "precision": null,
+        "ngpus": null,
+        "use_wandb": true,
+        "eval_interval": 100,
+        "log_interval": 10,
+        "eval_iters": 200,
+        "eval_only": false,
+        "always_save_checkpoint": false,
+        "init_from": "scratch",
+        "wandb_project": "WordPlay",
+        "max_iters": 1000,
+        "warmup_iters": 100,
+        "dtype": "bf16",
+        "compile": false
+    },
+    "model": {
+        "n_layer": 12,
+        "n_head": 12,
+        "n_embd": 768,
+        "batch_size": 64,
+        "block_size": 1024,
+        "activation": "gelu",
+        "dropout": 0.0,
+        "bias": false,
+        "vocab_size": 65
+    },
+    "data": {
+        "dataset": "shakespeare_char",
+        "out_dir": "out-shakespeare-char",
+        "root_path": null
+    },
+    "optimizer": {
+        "gas": 1,
+        "name": "AdamW",
+        "learning_rate": 0.0006,
+        "weight_decay": 0.1,
+        "beta1": 0.9,
+        "beta2": 0.95,
+        "grad_clip": 1.0,
+        "decay_lr": true,
+        "lr_decay_iters": 600000,
+        "min_lr": 6e-05
+    }
+}
+[2024-11-19 22:48:45.053906][WARNING][__main__.py:94] - Output dir: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:48:45.054463][INFO][trainer.py:248] - Initializing a new model from scratch
+[2024-11-19 22:48:46.273043][INFO][model.py:255] - number of parameters: 85.00M
+[2024-11-19 22:48:46.353454][INFO][trainer.py:266] - Model size: num_params=85003776
+[2024-11-19 22:48:46.357149][INFO][model.py:445] - num decayed parameter tensors: 50, with 85,771,008 parameters
+[2024-11-19 22:48:46.357796][INFO][model.py:449] - num non-decayed parameter tensors: 25, with 19,200 parameters
+[2024-11-19 22:48:47.596701][INFO][model.py:465] - using fused AdamW: True
+/home/awood/wordplay/src/wordplay/trainer.py:303: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  grad_scaler = GradScaler(
+[2024-11-19 22:48:47.599074][CRITICAL][trainer.py:318] - "devid='cuda:0'"
+[2024-11-19 22:48:47.611006][INFO][trainer.py:358] - • self.model=GPT(
+  (transformer): ModuleDict(
+    (wte): Embedding(65, 768)
+    (wpe): Embedding(1024, 768)
+    (drop): Dropout(p=0.0, inplace=False)
+    (h): ModuleList(
+      (0-11): 12 x Block(
+        (ln_1): LayerNorm()
+        (attn): CausalSelfAttention(
+          (c_attn): Linear(in_features=768, out_features=2304, bias=False)
+          (c_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_dropout): Dropout(p=0.0, inplace=False)
+          (resid_dropout): Dropout(p=0.0, inplace=False)
+        )
+        (ln_2): LayerNorm()
+        (mlp): MLP(
+          (c_fc): Linear(in_features=768, out_features=3072, bias=False)
+          (act_fn): GELU(approximate='none')
+          (c_proj): Linear(in_features=3072, out_features=768, bias=False)
+          (dropout): Dropout(p=0.0, inplace=False)
+        )
+      )
+    )
+    (ln_f): LayerNorm()
+  )
+  (lm_head): Linear(in_features=768, out_features=65, bias=False)
+)
+[2024-11-19 22:48:47.615517][INFO][trainer.py:359] - • self.grad_scaler=<torch.cuda.amp.grad_scaler.GradScaler object at 0x153c9c175510>
+[2024-11-19 22:48:47.616604][INFO][trainer.py:360] - • self.model_engine=DistributedDataParallel(
+  (module): GPT(
+    (transformer): ModuleDict(
+      (wte): Embedding(65, 768)
+      (wpe): Embedding(1024, 768)
+      (drop): Dropout(p=0.0, inplace=False)
+      (h): ModuleList(
+        (0-11): 12 x Block(
+          (ln_1): LayerNorm()
+          (attn): CausalSelfAttention(
+            (c_attn): Linear(in_features=768, out_features=2304, bias=False)
+            (c_proj): Linear(in_features=768, out_features=768, bias=False)
+            (attn_dropout): Dropout(p=0.0, inplace=False)
+            (resid_dropout): Dropout(p=0.0, inplace=False)
+          )
+          (ln_2): LayerNorm()
+          (mlp): MLP(
+            (c_fc): Linear(in_features=768, out_features=3072, bias=False)
+            (act_fn): GELU(approximate='none')
+            (c_proj): Linear(in_features=3072, out_features=768, bias=False)
+            (dropout): Dropout(p=0.0, inplace=False)
+          )
+        )
+      )
+      (ln_f): LayerNorm()
+    )
+    (lm_head): Linear(in_features=768, out_features=65, bias=False)
+  )
+)
+[2024-11-19 22:48:47.620360][INFO][trainer.py:361] - • self.optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.95)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: True
+    lr: 0.0006
+    maximize: False
+    weight_decay: 0.1
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.95)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: True
+    lr: 0.0006
+    maximize: False
+    weight_decay: 0.0
+)
+[2024-11-19 22:48:47.711397][INFO][trainer.py:809] - Startup time: 11.2024
+                Training Legend                 
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        abbr ┃ desc                           ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│        step │ Current training iteration     │
+│        loss │ Loss value                     │
+│          dt │ Elapsed time per training step │
+│         dtf │ Elapsed time per forward step  │
+│         dtb │ Elapsed time per backward step │
+│         sps │ Samples per second             │
+│ sps_per_gpu │ Samples per second (per GPU)   │
+│         tps │ Tokens per second              │
+│ tps_per_gpu │ Tokens per second (per GPU)    │
+│         mfu │ Model flops utilization        │
+└─────────────┴────────────────────────────────┘
+[2024-11-19 22:48:49.288013][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:48:49.289867][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?;iiHEEEFon odnEdi:DDH UqoDTFEETDGXX?;iExkn;nRnoG  kDdU GGEdd;unE!dddd&HFD!TA o
+.:NNUUaaalJ:lnn;  dnllGnFDEEoDHTTDAFGkj:  !GG.WWDEj3IRHHnFN  Dnnnnnhnd;:Nw3hEFcN nodnFnopddnn;nTcN:cHlrrooonokGNn Nc;qrrFl&NFNHkFhhtkGonndr;knnnG;EdA
+kHNNnnnTklFn;nnTAtTnFhhdddd
+[2024-11-19 22:49:29.272274][INFO][trainer.py:892] - step=10 loss=3.04836 dt=0.280545 dtf=0.00600181 dtb=0.0137273 sps=28.5159 sps_per_gpu=3.56448 tps=1.86882e+06 tps_per_gpu=233602 mfu=46.6657
+[2024-11-19 22:49:32.233527][INFO][trainer.py:892] - step=20 loss=2.70843 dt=0.30742 dtf=0.00872256 dtb=0.016543 sps=26.023 sps_per_gpu=3.25288 tps=1.70544e+06 tps_per_gpu=213180 mfu=46.2577
+[2024-11-19 22:49:35.189755][INFO][trainer.py:892] - step=30 loss=2.55416 dt=0.294621 dtf=0.00707857 dtb=0.0169111 sps=27.1535 sps_per_gpu=3.39419 tps=1.77953e+06 tps_per_gpu=222442 mfu=46.0756
+[2024-11-19 22:49:38.143839][INFO][trainer.py:892] - step=40 loss=2.5169 dt=0.290852 dtf=0.00629695 dtb=0.0221526 sps=27.5054 sps_per_gpu=3.43817 tps=1.80259e+06 tps_per_gpu=225324 mfu=45.9692
+[2024-11-19 22:49:41.107113][INFO][trainer.py:892] - step=50 loss=2.46456 dt=0.310047 dtf=0.00690353 dtb=0.0159683 sps=25.8026 sps_per_gpu=3.22532 tps=1.691e+06 tps_per_gpu=211375 mfu=45.5948
+[2024-11-19 22:49:44.097672][INFO][trainer.py:892] - step=60 loss=2.46786 dt=0.299163 dtf=0.00606193 dtb=0.015836 sps=26.7413 sps_per_gpu=3.34266 tps=1.75252e+06 tps_per_gpu=219065 mfu=45.4115
+[2024-11-19 22:49:47.111741][INFO][trainer.py:892] - step=70 loss=2.46058 dt=0.294362 dtf=0.00606374 dtb=0.0212778 sps=27.1774 sps_per_gpu=3.39718 tps=1.7811e+06 tps_per_gpu=222638 mfu=45.3179
+[2024-11-19 22:49:50.088175][INFO][trainer.py:892] - step=80 loss=2.45139 dt=0.293664 dtf=0.0074793 dtb=0.024122 sps=27.242 sps_per_gpu=3.40525 tps=1.78533e+06 tps_per_gpu=223166 mfu=45.2442
+[2024-11-19 22:49:53.067287][INFO][trainer.py:892] - step=90 loss=2.45771 dt=0.288905 dtf=0.00596031 dtb=0.0230798 sps=27.6908 sps_per_gpu=3.46134 tps=1.81474e+06 tps_per_gpu=226843 mfu=45.2513
+[2024-11-19 22:49:56.039217][INFO][trainer.py:892] - step=100 loss=2.44821 dt=0.290421 dtf=0.00708646 dtb=0.0153215 sps=27.5463 sps_per_gpu=3.44328 tps=1.80527e+06 tps_per_gpu=225659 mfu=45.2341
+[2024-11-19 22:49:57.181852][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:49:57.189689][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+TORAM:
+Thrthash t he, te stoa sou n handist ilse y weris, the n.
+Ton age chad tith'd wisit thile as suloun t s t t lofons hay hese that d te se and me weryspino tod se ishe hore oma ofo h tade the shar worsor be t hand ard beanowheer t,
+For blacano therc
+[2024-11-19 22:50:34.347856][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:50:34.349999][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:50:36.585921][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:50:39.590792][INFO][trainer.py:892] - step=110 loss=2.42347 dt=0.301273 dtf=0.00599554 dtb=0.0366785 sps=26.554 sps_per_gpu=3.31925 tps=1.74024e+06 tps_per_gpu=217531 mfu=45.0562
+[2024-11-19 22:50:42.578872][INFO][trainer.py:892] - step=120 loss=2.44236 dt=0.315301 dtf=0.00609909 dtb=0.0280999 sps=25.3726 sps_per_gpu=3.17157 tps=1.66282e+06 tps_per_gpu=207852 mfu=44.7027
+[2024-11-19 22:50:45.541006][INFO][trainer.py:892] - step=130 loss=2.42348 dt=0.293905 dtf=0.00688159 dtb=0.0262699 sps=27.2196 sps_per_gpu=3.40246 tps=1.78387e+06 tps_per_gpu=222983 mfu=44.6869
+[2024-11-19 22:50:48.542515][INFO][trainer.py:892] - step=140 loss=2.38354 dt=0.289756 dtf=0.00628463 dtb=0.0159528 sps=27.6094 sps_per_gpu=3.45117 tps=1.80941e+06 tps_per_gpu=226176 mfu=44.7364
+[2024-11-19 22:50:51.530703][INFO][trainer.py:892] - step=150 loss=2.37444 dt=0.276378 dtf=0.00652757 dtb=0.0167942 sps=28.9459 sps_per_gpu=3.61823 tps=1.897e+06 tps_per_gpu=237124 mfu=44.9997
+[2024-11-19 22:50:54.520301][INFO][trainer.py:892] - step=160 loss=2.32982 dt=0.321353 dtf=0.00619432 dtb=0.027536 sps=24.8947 sps_per_gpu=3.11184 tps=1.6315e+06 tps_per_gpu=203938 mfu=44.5737
+[2024-11-19 22:50:57.558681][INFO][trainer.py:892] - step=170 loss=2.30847 dt=0.300731 dtf=0.00634414 dtb=0.0146415 sps=26.6018 sps_per_gpu=3.32523 tps=1.74338e+06 tps_per_gpu=217922 mfu=44.4697
+[2024-11-19 22:51:00.551746][INFO][trainer.py:892] - step=180 loss=2.23397 dt=0.294681 dtf=0.00651919 dtb=0.0163946 sps=27.148 sps_per_gpu=3.3935 tps=1.77917e+06 tps_per_gpu=222397 mfu=44.4654
+[2024-11-19 22:51:03.530271][INFO][trainer.py:892] - step=190 loss=2.14099 dt=0.29434 dtf=0.00616738 dtb=0.0140694 sps=27.1795 sps_per_gpu=3.39743 tps=1.78123e+06 tps_per_gpu=222654 mfu=44.4668
+[2024-11-19 22:51:06.511201][INFO][trainer.py:892] - step=200 loss=2.06791 dt=0.314914 dtf=0.00588724 dtb=0.0165636 sps=25.4038 sps_per_gpu=3.17547 tps=1.66486e+06 tps_per_gpu=208108 mfu=44.1774
+[2024-11-19 22:51:07.649813][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:51:07.651361][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+Whaster that him a prind thend a the seppears
+Thall have saks ind brose thourme ond por oftt to blow arcont I clonce asing.
+Of thathe blomblome matin by milive,
+An to treathe asteele ansty suces tirefereithing pue foriong.
+Whick you tou culif thinseroreic
+[2024-11-19 22:51:45.047856][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:51:45.049990][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:51:47.727088][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:51:50.737587][INFO][trainer.py:892] - step=210 loss=2.00489 dt=0.297584 dtf=0.00607462 dtb=0.0139731 sps=26.8831 sps_per_gpu=3.36039 tps=1.76181e+06 tps_per_gpu=220227 mfu=44.159
+[2024-11-19 22:51:53.753633][INFO][trainer.py:892] - step=220 loss=1.91533 dt=0.30948 dtf=0.00630826 dtb=0.0147115 sps=25.8499 sps_per_gpu=3.23123 tps=1.6941e+06 tps_per_gpu=211762 mfu=43.9734
+[2024-11-19 22:51:56.702865][INFO][trainer.py:892] - step=230 loss=1.87754 dt=0.31073 dtf=0.00632983 dtb=0.0281245 sps=25.7458 sps_per_gpu=3.21823 tps=1.68728e+06 tps_per_gpu=210910 mfu=43.7893
+[2024-11-19 22:51:59.690337][INFO][trainer.py:892] - step=240 loss=1.80185 dt=0.294822 dtf=0.00672092 dtb=0.0160075 sps=27.135 sps_per_gpu=3.39188 tps=1.77832e+06 tps_per_gpu=222290 mfu=43.851
+[2024-11-19 22:52:02.675287][INFO][trainer.py:892] - step=250 loss=1.74795 dt=0.28423 dtf=0.00614427 dtb=0.0160921 sps=28.1462 sps_per_gpu=3.51828 tps=1.84459e+06 tps_per_gpu=230574 mfu=44.0719
+[2024-11-19 22:52:05.672738][INFO][trainer.py:892] - step=260 loss=1.68661 dt=0.290987 dtf=0.0062945 dtb=0.0145441 sps=27.4926 sps_per_gpu=3.43658 tps=1.80176e+06 tps_per_gpu=225220 mfu=44.1639
+[2024-11-19 22:52:08.678864][INFO][trainer.py:892] - step=270 loss=1.62401 dt=0.313154 dtf=0.00628893 dtb=0.0241317 sps=25.5465 sps_per_gpu=3.19331 tps=1.67422e+06 tps_per_gpu=209277 mfu=43.9281
+[2024-11-19 22:52:11.684081][INFO][trainer.py:892] - step=280 loss=1.57797 dt=0.298386 dtf=0.00647666 dtb=0.0220793 sps=26.811 sps_per_gpu=3.35137 tps=1.75708e+06 tps_per_gpu=219635 mfu=43.9229
+[2024-11-19 22:52:14.681121][INFO][trainer.py:892] - step=290 loss=1.53214 dt=0.322613 dtf=0.0063995 dtb=0.0166267 sps=24.7975 sps_per_gpu=3.09969 tps=1.62513e+06 tps_per_gpu=203141 mfu=43.5886
+[2024-11-19 22:52:17.685910][INFO][trainer.py:892] - step=300 loss=1.49059 dt=0.295122 dtf=0.00628495 dtb=0.0265487 sps=27.1074 sps_per_gpu=3.38843 tps=1.77651e+06 tps_per_gpu=222064 mfu=43.6659
+[2024-11-19 22:52:18.823792][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:52:18.824512][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+LORD WILLOUGHEY:
+The art less of theirs.
+
+PROLIXENES:
+Farend, bedigness is gallows?
+
+MPOUKE VINCERY:
+Appeach not thou statest of the solding:
+But if this served live of the boss,
+Or shall lot that their senssior the well,
+But hast but comple this complet
+[2024-11-19 22:52:56.215977][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:52:56.218132][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:52:58.891842][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:53:01.897097][INFO][trainer.py:892] - step=310 loss=1.48071 dt=0.307666 dtf=0.00771796 dtb=0.0156009 sps=26.0023 sps_per_gpu=3.25028 tps=1.70408e+06 tps_per_gpu=213010 mfu=43.5545
+[2024-11-19 22:53:04.883988][INFO][trainer.py:892] - step=320 loss=1.42035 dt=0.30958 dtf=0.00606434 dtb=0.0136688 sps=25.8414 sps_per_gpu=3.23018 tps=1.69354e+06 tps_per_gpu=211693 mfu=43.4279
+[2024-11-19 22:53:07.875247][INFO][trainer.py:892] - step=330 loss=1.38368 dt=0.290084 dtf=0.00632303 dtb=0.0157174 sps=27.5782 sps_per_gpu=3.44728 tps=1.80737e+06 tps_per_gpu=225921 mfu=43.5983
+[2024-11-19 22:53:10.891953][INFO][trainer.py:892] - step=340 loss=1.3412 dt=0.271286 dtf=0.00649803 dtb=0.0179603 sps=29.4892 sps_per_gpu=3.68615 tps=1.9326e+06 tps_per_gpu=241576 mfu=44.0643
+[2024-11-19 22:53:13.869362][INFO][trainer.py:892] - step=350 loss=1.29127 dt=0.29543 dtf=0.00651136 dtb=0.0273071 sps=27.0792 sps_per_gpu=3.3849 tps=1.77466e+06 tps_per_gpu=221833 mfu=44.0893
+[2024-11-19 22:53:16.851928][INFO][trainer.py:892] - step=360 loss=1.24314 dt=0.305511 dtf=0.00646658 dtb=0.0226999 sps=26.1856 sps_per_gpu=3.2732 tps=1.7161e+06 tps_per_gpu=214513 mfu=43.9656
+[2024-11-19 22:53:19.839709][INFO][trainer.py:892] - step=370 loss=1.22 dt=0.298669 dtf=0.00635868 dtb=0.0265729 sps=26.7855 sps_per_gpu=3.34819 tps=1.75542e+06 tps_per_gpu=219427 mfu=43.9525
+[2024-11-19 22:53:22.861619][INFO][trainer.py:892] - step=380 loss=1.1871 dt=0.312403 dtf=0.00616362 dtb=0.0189261 sps=25.6079 sps_per_gpu=3.20099 tps=1.67824e+06 tps_per_gpu=209780 mfu=43.7479
+[2024-11-19 22:53:25.848119][INFO][trainer.py:892] - step=390 loss=1.1466 dt=0.291612 dtf=0.00642361 dtb=0.027684 sps=27.4337 sps_per_gpu=3.42921 tps=1.79789e+06 tps_per_gpu=224737 mfu=43.8626
+[2024-11-19 22:53:28.854006][INFO][trainer.py:892] - step=400 loss=1.10096 dt=0.30242 dtf=0.00650311 dtb=0.023619 sps=26.4533 sps_per_gpu=3.30666 tps=1.73364e+06 tps_per_gpu=216705 mfu=43.8053
+[2024-11-19 22:53:30.007009][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:53:30.009174][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+BUCKINGHAM:
+The fieze of your own your own friends,
+They might thwail you did not them die.
+God now me in this this fornight that news?
+
+GLOUCESTER:
+No; let me this my month hands is so.
+
+BUCKINGHAM:
+None of this the duke a my fault;
+The shall sweet him 
+[2024-11-19 22:54:07.375061][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:54:07.377236][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:54:10.047821][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:54:13.040545][INFO][trainer.py:892] - step=410 loss=1.08341 dt=0.294133 dtf=0.00610466 dtb=0.0221536 sps=27.1986 sps_per_gpu=3.39982 tps=1.78249e+06 tps_per_gpu=222811 mfu=43.8758
+[2024-11-19 22:54:16.013836][INFO][trainer.py:892] - step=420 loss=1.04286 dt=0.293705 dtf=0.0060668 dtb=0.0140797 sps=27.2382 sps_per_gpu=3.40478 tps=1.78509e+06 tps_per_gpu=223136 mfu=43.9457
+[2024-11-19 22:54:18.981784][INFO][trainer.py:892] - step=430 loss=1.00975 dt=0.305929 dtf=0.00586156 dtb=0.0204793 sps=26.1499 sps_per_gpu=3.26874 tps=1.71376e+06 tps_per_gpu=214220 mfu=43.8305
+[2024-11-19 22:54:21.981308][INFO][trainer.py:892] - step=440 loss=0.961459 dt=0.295539 dtf=0.00644721 dtb=0.0384604 sps=27.0691 sps_per_gpu=3.38364 tps=1.774e+06 tps_per_gpu=221750 mfu=43.8773
+[2024-11-19 22:54:25.001975][INFO][trainer.py:892] - step=450 loss=0.898411 dt=0.296475 dtf=0.00602571 dtb=0.0150993 sps=26.9837 sps_per_gpu=3.37297 tps=1.76841e+06 tps_per_gpu=221051 mfu=43.9054
+[2024-11-19 22:54:28.020400][INFO][trainer.py:892] - step=460 loss=0.867872 dt=0.295275 dtf=0.00627342 dtb=0.0233176 sps=27.0934 sps_per_gpu=3.38667 tps=1.77559e+06 tps_per_gpu=221949 mfu=43.9486
+[2024-11-19 22:54:31.023872][INFO][trainer.py:892] - step=470 loss=0.813743 dt=0.307433 dtf=0.00614855 dtb=0.016939 sps=26.0219 sps_per_gpu=3.25274 tps=1.70537e+06 tps_per_gpu=213172 mfu=43.8122
+[2024-11-19 22:54:34.029878][INFO][trainer.py:892] - step=480 loss=0.749315 dt=0.294994 dtf=0.00616728 dtb=0.021976 sps=27.1192 sps_per_gpu=3.3899 tps=1.77728e+06 tps_per_gpu=222161 mfu=43.869
+[2024-11-19 22:54:37.069911][INFO][trainer.py:892] - step=490 loss=0.643745 dt=0.318477 dtf=0.00630113 dtb=0.0269836 sps=25.1196 sps_per_gpu=3.13995 tps=1.64624e+06 tps_per_gpu=205779 mfu=43.5929
+[2024-11-19 22:54:40.095606][INFO][trainer.py:892] - step=500 loss=0.595485 dt=0.31421 dtf=0.00704431 dtb=0.0349348 sps=25.4607 sps_per_gpu=3.18259 tps=1.66859e+06 tps_per_gpu=208574 mfu=43.4002
+[2024-11-19 22:54:41.238399][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:54:41.241100][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+LUCIO:
+Spoke a poor for in a pupiscuous of the sun,
+To the devise dies to your reputations; that
+traitly I will wish, and hanging my poor soul,
+My temperation blent and the sun will thee at in
+ide-coth , I was no gazed it for it; I pray you,
+Justice to r
+[2024-11-19 22:55:18.537535][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:55:18.539483][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:55:21.227058][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:55:24.251710][INFO][trainer.py:892] - step=510 loss=0.521953 dt=0.290496 dtf=0.00602194 dtb=0.01397 sps=27.5391 sps_per_gpu=3.44239 tps=1.8048e+06 tps_per_gpu=225601 mfu=43.5669
+[2024-11-19 22:55:27.244816][INFO][trainer.py:892] - step=520 loss=0.467038 dt=0.285042 dtf=0.0061338 dtb=0.0141665 sps=28.066 sps_per_gpu=3.50825 tps=1.83933e+06 tps_per_gpu=229917 mfu=43.8031
+[2024-11-19 22:55:30.233911][INFO][trainer.py:892] - step=530 loss=0.388689 dt=0.294452 dtf=0.00615995 dtb=0.0138563 sps=27.1691 sps_per_gpu=3.39614 tps=1.78056e+06 tps_per_gpu=222569 mfu=43.869
+[2024-11-19 22:55:33.219580][INFO][trainer.py:892] - step=540 loss=0.314088 dt=0.286905 dtf=0.00602456 dtb=0.020158 sps=27.8838 sps_per_gpu=3.48547 tps=1.82739e+06 tps_per_gpu=228424 mfu=44.0452
+[2024-11-19 22:55:36.197445][INFO][trainer.py:892] - step=550 loss=0.240434 dt=0.305991 dtf=0.00608938 dtb=0.0275994 sps=26.1445 sps_per_gpu=3.26807 tps=1.71341e+06 tps_per_gpu=214176 mfu=43.9192
+[2024-11-19 22:55:39.188473][INFO][trainer.py:892] - step=560 loss=0.199687 dt=0.273184 dtf=0.00604298 dtb=0.0206007 sps=29.2843 sps_per_gpu=3.66054 tps=1.91918e+06 tps_per_gpu=239897 mfu=44.3196
+[2024-11-19 22:55:42.224502][INFO][trainer.py:892] - step=570 loss=0.164287 dt=0.29647 dtf=0.00624316 dtb=0.0149802 sps=26.9842 sps_per_gpu=3.37303 tps=1.76844e+06 tps_per_gpu=221055 mfu=44.3035
+[2024-11-19 22:55:45.214087][INFO][trainer.py:892] - step=580 loss=0.166011 dt=0.304998 dtf=0.00605793 dtb=0.0265813 sps=26.2297 sps_per_gpu=3.27871 tps=1.71899e+06 tps_per_gpu=214873 mfu=44.1656
+[2024-11-19 22:55:48.230319][INFO][trainer.py:892] - step=590 loss=0.127011 dt=0.288857 dtf=0.00670574 dtb=0.0165343 sps=27.6953 sps_per_gpu=3.46192 tps=1.81504e+06 tps_per_gpu=226880 mfu=44.2814
+[2024-11-19 22:55:51.214854][INFO][trainer.py:892] - step=600 loss=0.0824344 dt=0.28893 dtf=0.00602789 dtb=0.0149099 sps=27.6883 sps_per_gpu=3.46104 tps=1.81458e+06 tps_per_gpu=226823 mfu=44.3844
+[2024-11-19 22:55:52.335260][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:55:52.335953][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+PLIXENES:
+I do do this with:
+I have not yet one but there's gone, for I cannot go that,
+And the sa
+While my life and honour marriage with your grief,
+But sunden false of the weariser of these war.
+
+CAPULET:
+The news will not I can tell thee will from she
+[2024-11-19 22:56:30.068734][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:56:30.070908][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:56:32.821289][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:56:35.810615][INFO][trainer.py:892] - step=610 loss=0.0736641 dt=0.286905 dtf=0.00616601 dtb=0.0159328 sps=27.8838 sps_per_gpu=3.48548 tps=1.82739e+06 tps_per_gpu=228424 mfu=44.5091
+[2024-11-19 22:56:38.778350][INFO][trainer.py:892] - step=620 loss=0.0694835 dt=0.301028 dtf=0.00604063 dtb=0.0148488 sps=26.5756 sps_per_gpu=3.32195 tps=1.74166e+06 tps_per_gpu=217707 mfu=44.4072
+[2024-11-19 22:56:41.732366][INFO][trainer.py:892] - step=630 loss=0.188227 dt=0.30112 dtf=0.00649611 dtb=0.0158112 sps=26.5675 sps_per_gpu=3.32094 tps=1.74113e+06 tps_per_gpu=217641 mfu=44.3142
+[2024-11-19 22:56:44.737173][INFO][trainer.py:892] - step=640 loss=0.119092 dt=0.289562 dtf=0.0068835 dtb=0.017444 sps=27.6279 sps_per_gpu=3.45349 tps=1.81062e+06 tps_per_gpu=226328 mfu=44.404
+[2024-11-19 22:56:47.759391][INFO][trainer.py:892] - step=650 loss=0.0795864 dt=0.30758 dtf=0.00625615 dtb=0.0286876 sps=26.0095 sps_per_gpu=3.25118 tps=1.70456e+06 tps_per_gpu=213069 mfu=44.22
+[2024-11-19 22:56:50.735246][INFO][trainer.py:892] - step=660 loss=0.0612983 dt=0.299063 dtf=0.00604581 dtb=0.0215139 sps=26.7502 sps_per_gpu=3.34378 tps=1.7531e+06 tps_per_gpu=219138 mfu=44.1756
+[2024-11-19 22:56:53.753056][INFO][trainer.py:892] - step=670 loss=0.0556611 dt=0.310915 dtf=0.00627055 dtb=0.0171748 sps=25.7305 sps_per_gpu=3.21632 tps=1.68628e+06 tps_per_gpu=210784 mfu=43.9688
+[2024-11-19 22:56:56.784940][INFO][trainer.py:892] - step=680 loss=0.0555047 dt=0.290972 dtf=0.00646203 dtb=0.015639 sps=27.494 sps_per_gpu=3.43676 tps=1.80185e+06 tps_per_gpu=225231 mfu=44.0713
+[2024-11-19 22:56:59.820583][INFO][trainer.py:892] - step=690 loss=0.284663 dt=0.304393 dtf=0.00644815 dtb=0.0224782 sps=26.2818 sps_per_gpu=3.28523 tps=1.72241e+06 tps_per_gpu=215301 mfu=43.9651
+[2024-11-19 22:57:02.853444][INFO][trainer.py:892] - step=700 loss=0.123765 dt=0.291305 dtf=0.00660665 dtb=0.0152248 sps=27.4626 sps_per_gpu=3.43283 tps=1.79979e+06 tps_per_gpu=224974 mfu=44.0628
+[2024-11-19 22:57:04.000478][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:57:04.002822][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+Page:
+Hast no more but all his cheen?
+
+SLY:
+Ay, he does next what I hope.
+
+Pursue:
+less here speak, or lord, here's must news.
+
+BENVALIO:
+It speak we would not.
+
+Third Claudio, per:
+Here is no more remembers of my virtuous,
+But see, I see here son my rig
+[2024-11-19 22:57:41.456453][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:57:41.458484][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:57:44.145011][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:57:47.166823][INFO][trainer.py:892] - step=710 loss=0.0686274 dt=0.322419 dtf=0.00591867 dtb=0.0226316 sps=24.8124 sps_per_gpu=3.10155 tps=1.62611e+06 tps_per_gpu=203263 mfu=43.717
+[2024-11-19 22:57:50.179929][INFO][trainer.py:892] - step=720 loss=0.0542032 dt=0.30798 dtf=0.00620455 dtb=0.0230387 sps=25.9757 sps_per_gpu=3.24696 tps=1.70234e+06 tps_per_gpu=212793 mfu=43.5962
+[2024-11-19 22:57:53.145378][INFO][trainer.py:892] - step=730 loss=0.0497591 dt=0.278072 dtf=0.00631651 dtb=0.0227097 sps=28.7695 sps_per_gpu=3.59619 tps=1.88544e+06 tps_per_gpu=235680 mfu=43.9447
+[2024-11-19 22:57:56.123484][INFO][trainer.py:892] - step=740 loss=0.0459231 dt=0.295876 dtf=0.00623396 dtb=0.0178704 sps=27.0383 sps_per_gpu=3.37979 tps=1.77198e+06 tps_per_gpu=221498 mfu=43.975
+[2024-11-19 22:57:59.096365][INFO][trainer.py:892] - step=750 loss=0.282061 dt=0.2949 dtf=0.00695674 dtb=0.0224791 sps=27.1278 sps_per_gpu=3.39098 tps=1.77785e+06 tps_per_gpu=222231 mfu=44.0169
+[2024-11-19 22:58:02.104279][INFO][trainer.py:892] - step=760 loss=0.0927768 dt=0.302538 dtf=0.00663468 dtb=0.0166315 sps=26.4429 sps_per_gpu=3.30537 tps=1.73296e+06 tps_per_gpu=216620 mfu=43.9425
+[2024-11-19 22:58:05.084063][INFO][trainer.py:892] - step=770 loss=0.0544226 dt=0.29601 dtf=0.00631269 dtb=0.0149978 sps=27.0261 sps_per_gpu=3.37827 tps=1.77118e+06 tps_per_gpu=221398 mfu=43.971
+[2024-11-19 22:58:08.117231][INFO][trainer.py:892] - step=780 loss=0.0446577 dt=0.328257 dtf=0.00653566 dtb=0.0161742 sps=24.3711 sps_per_gpu=3.04639 tps=1.59719e+06 tps_per_gpu=199648 mfu=43.5622
+[2024-11-19 22:58:11.108998][INFO][trainer.py:892] - step=790 loss=0.0441146 dt=0.310235 dtf=0.00602312 dtb=0.0194461 sps=25.7869 sps_per_gpu=3.22337 tps=1.68997e+06 tps_per_gpu=211247 mfu=43.426
+[2024-11-19 22:58:14.107081][INFO][trainer.py:892] - step=800 loss=0.0412164 dt=0.316495 dtf=0.00608368 dtb=0.0156109 sps=25.2768 sps_per_gpu=3.1596 tps=1.65654e+06 tps_per_gpu=207068 mfu=43.2199
+[2024-11-19 22:58:15.252185][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:58:15.254844][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+Servant:
+And this stard stars, is 'tis a noble piner man.
+
+LEONTES:
+Traitors, thou art in a more.
+Thou dreadful the one are thy womb, the rest,
+And there all the officers for the boes,
+Death on the seal'st corduction.
+
+Second Servant:
+We cannot be here.
+
+[2024-11-19 22:58:52.661570][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 22:58:52.663627][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 22:58:55.351826][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 22:58:58.368773][INFO][trainer.py:892] - step=810 loss=0.0382246 dt=0.279771 dtf=0.00604041 dtb=0.0137967 sps=28.5948 sps_per_gpu=3.57435 tps=1.87399e+06 tps_per_gpu=234248 mfu=43.5774
+[2024-11-19 22:59:01.357205][INFO][trainer.py:892] - step=820 loss=0.169902 dt=0.296113 dtf=0.00615096 dtb=0.0231153 sps=27.0167 sps_per_gpu=3.37708 tps=1.77056e+06 tps_per_gpu=221321 mfu=43.6409
+[2024-11-19 22:59:04.350969][INFO][trainer.py:892] - step=830 loss=0.0654338 dt=0.308471 dtf=0.00588339 dtb=0.0153806 sps=25.9344 sps_per_gpu=3.2418 tps=1.69964e+06 tps_per_gpu=212454 mfu=43.5209
+[2024-11-19 22:59:07.371980][INFO][trainer.py:892] - step=840 loss=0.0468964 dt=0.297336 dtf=0.00599799 dtb=0.014754 sps=26.9056 sps_per_gpu=3.36319 tps=1.76328e+06 tps_per_gpu=220410 mfu=43.5718
+[2024-11-19 22:59:10.363681][INFO][trainer.py:892] - step=850 loss=0.0393551 dt=0.293551 dtf=0.00609967 dtb=0.0275959 sps=27.2525 sps_per_gpu=3.40657 tps=1.78602e+06 tps_per_gpu=223253 mfu=43.6745
+[2024-11-19 22:59:13.349417][INFO][trainer.py:892] - step=860 loss=0.0366855 dt=0.315204 dtf=0.00621073 dtb=0.0225578 sps=25.3804 sps_per_gpu=3.17255 tps=1.66333e+06 tps_per_gpu=207916 mfu=43.4605
+[2024-11-19 22:59:16.362536][INFO][trainer.py:892] - step=870 loss=0.0404264 dt=0.293337 dtf=0.00600691 dtb=0.0334854 sps=27.2724 sps_per_gpu=3.40905 tps=1.78732e+06 tps_per_gpu=223415 mfu=43.5775
+[2024-11-19 22:59:19.375926][INFO][trainer.py:892] - step=880 loss=0.0395663 dt=0.301062 dtf=0.00600898 dtb=0.0138045 sps=26.5726 sps_per_gpu=3.32157 tps=1.74146e+06 tps_per_gpu=217682 mfu=43.5683
+[2024-11-19 22:59:22.399458][INFO][trainer.py:892] - step=890 loss=0.0638853 dt=0.328414 dtf=0.00621396 dtb=0.0282998 sps=24.3595 sps_per_gpu=3.04493 tps=1.59642e+06 tps_per_gpu=199553 mfu=43.1979
+[2024-11-19 22:59:25.411958][INFO][trainer.py:892] - step=900 loss=0.0657208 dt=0.308974 dtf=0.00682716 dtb=0.015919 sps=25.8922 sps_per_gpu=3.23652 tps=1.69687e+06 tps_per_gpu=212109 mfu=43.1153
+[2024-11-19 22:59:26.540133][INFO][trainer.py:827] - ['prompt']: 'What is an LLM?'
+[2024-11-19 22:59:26.542347][INFO][trainer.py:831] - ['response']:
+
+What is an LLM?
+
+POMPEY:
+Come, sir, fear you not know, when you have been addy,
+so too, had as you the thing you use the husband,
+And so be command in your affairs, and friends,
+You are no guilty of this sensemity.
+
+ESCALUS:
+Which not traitors her more and for long for e
+[2024-11-19 23:00:03.617181][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 23:00:03.619287][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 23:00:06.294247][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+[2024-11-19 23:00:09.367698][INFO][trainer.py:892] - step=910 loss=0.0431124 dt=0.299996 dtf=0.00659914 dtb=0.014844 sps=26.667 sps_per_gpu=3.33337 tps=1.74765e+06 tps_per_gpu=218456 mfu=43.1677
+[2024-11-19 23:00:12.371382][INFO][trainer.py:892] - step=920 loss=0.0348631 dt=0.301806 dtf=0.00618062 dtb=0.0230083 sps=26.5071 sps_per_gpu=3.31339 tps=1.73717e+06 tps_per_gpu=217146 mfu=43.1888
+[2024-11-19 23:00:15.424839][INFO][trainer.py:892] - step=930 loss=0.0329912 dt=0.299693 dtf=0.00597859 dtb=0.015863 sps=26.694 sps_per_gpu=3.33675 tps=1.74942e+06 tps_per_gpu=218677 mfu=43.2383
+[2024-11-19 23:00:18.407409][INFO][trainer.py:892] - step=940 loss=0.0348016 dt=0.302014 dtf=0.00635809 dtb=0.0215676 sps=26.4888 sps_per_gpu=3.3111 tps=1.73597e+06 tps_per_gpu=216996 mfu=43.2493
+[2024-11-19 23:00:21.390893][INFO][trainer.py:892] - step=950 loss=0.0364567 dt=0.291634 dtf=0.00633432 dtb=0.0143216 sps=27.4317 sps_per_gpu=3.42896 tps=1.79776e+06 tps_per_gpu=224720 mfu=43.4136
+[2024-11-19 23:00:24.391514][INFO][trainer.py:892] - step=960 loss=0.0432351 dt=0.291761 dtf=0.00629272 dtb=0.0213538 sps=27.4197 sps_per_gpu=3.42746 tps=1.79698e+06 tps_per_gpu=224622 mfu=43.5594
+[2024-11-19 23:00:27.383753][INFO][trainer.py:892] - step=970 loss=0.146661 dt=0.307208 dtf=0.00614573 dtb=0.0143549 sps=26.041 sps_per_gpu=3.25513 tps=1.70662e+06 tps_per_gpu=213328 mfu=43.465
+[2024-11-19 23:00:30.364961][INFO][trainer.py:892] - step=980 loss=0.0440515 dt=0.286715 dtf=0.00616129 dtb=0.0139085 sps=27.9022 sps_per_gpu=3.48778 tps=1.8286e+06 tps_per_gpu=228575 mfu=43.6846
+[2024-11-19 23:00:33.354510][INFO][trainer.py:892] - step=990 loss=0.0353272 dt=0.291555 dtf=0.00632962 dtb=0.0363819 sps=27.4391 sps_per_gpu=3.42989 tps=1.79825e+06 tps_per_gpu=224781 mfu=43.8065
+[2024-11-19 23:00:36.431105][INFO][trainer.py:892] - step=1000 loss=0.0299136 dt=0.576472 dtf=0.00622222 dtb=0.278677 sps=13.8775 sps_per_gpu=1.73469 tps=909478 tps_per_gpu=113685 mfu=41.6969
+[2024-11-19 23:00:37.571282][INFO][__main__.py:119] - ['prompt']: 'What is an LLM?'
+[2024-11-19 23:00:37.572941][INFO][__main__.py:120] - ['response']:
+
+What is an LLM?
+
+KING RICHARD III:
+Madam, I have a touch of your condition,
+Which cannot brook the accent of reproof.
+
+QUEEN ELIZABETH:
+O honest is not the Duke of Norfolk,
+That thou be not like to a foul angel:
+Either thou untaught in the wings of heaven;
+Then this tran
+[2024-11-19 23:00:37.575219][INFO][trainer.py:762] - Saving checkpoint to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37
+[2024-11-19 23:00:37.575801][INFO][trainer.py:763] - Saving model to: /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/model.pth
+[2024-11-19 23:00:40.278743][INFO][configs.py:141] - Appending /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37 to /home/awood/wordplay/src/ckpts/checkpoints.log
+wandb: - 0.000 MB of 0.000 MB uploaded
+wandb: Run history:
+wandb:                      Loss/iter ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb:                     Loss/lossf █▇▇▇▇▇▆▆▆▅▅▅▄▄▄▄▃▃▃▂▂▂▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                       Loss/mfu █▇▆▆▆▅▅▅▄▄▄▄▄▄▄▄▄▄▄▄▄▄▅▅▅▅▄▄▄▄▄▃▄▄▄▃▃▃▃▁
+wandb:                     Loss/train ████▅▅▅▅▄▄▄▄▃▃▃▃▃▃▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                       Loss/val ████▃▃▃▃▃▃▃▃▁▁▁▁▁▁▁▁▃▃▃▃▆▆▆▆▅▅▅▅▇▇▇▇▆▆▆▆
+wandb:                  Timing/dt_avg ▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁█
+wandb:                 Timing/dt_iter ▁▂▂▂▂▂▂▂▂▂▁▂▂▁▂▁▂▂▂▂▁▁▁▁▁▁▂▂▂▂▂▂▂▂▂▂▂▂▂█
+wandb:                  Timing/dt_tot ▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁█
+wandb:                 Timing/dtb_avg ▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁█
+wandb:                 Timing/dtb_tot ▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁█
+wandb:                 Timing/dtf_avg ▁▅▁▇▁▅▂▃▁▂▂▃█▃▃▃▁▃▂▂▁▁▁▄▂▅▂▃▂▂▂▁▂▁▁▂▂▂▂▂
+wandb:                 Timing/dtf_tot ▁▅▁▇▁▅▂▃▁▂▂▃█▃▃▃▁▃▂▂▁▁▁▄▂▅▂▃▂▂▂▁▂▁▁▂▂▂▂▂
+wandb:                    Timing/iter ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb:         Timing/samples_per_sec █▇▇▇▇▇▆▇▇▆▇▇▆█▇▇▇▇▇▆▇▇█▇▇▇▆▇▆▇▇▆▇▇▇▆▇▇▆▁
+wandb: Timing/samples_per_sec_per_gpu █▇▇▇▇▇▆▇▇▆▇▇▆█▇▇▇▇▇▆▇▇█▇▇▇▆▇▆▇▇▆▇▇▇▆▇▇▆▁
+wandb:            Timing/startup_time ▁
+wandb:          Timing/tokens_per_sec █▇▇▇▇▇▆▇▇▆▇▇▆█▇▇▇▇▇▆▇▇█▇▇▇▆▇▆▇▇▆▇▇▇▆▇▇▆▁
+wandb:  Timing/tokens_per_sec_per_gpu █▇▇▇▇▇▆▇▇▆▇▇▆█▇▇▇▇▇▆▇▇█▇▇▇▆▇▆▇▇▆▇▇▇▆▇▇▆▁
+wandb:                  Training/iter ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb:                  Training/loss █▇▇▇▇▇▆▆▆▅▅▅▄▄▄▄▃▃▃▂▂▂▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              Training/loss_tot █▇▇▇▇▇▆▆▆▅▅▅▄▄▄▄▃▃▃▂▂▂▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                    Training/lr ▁▃▅▆████████████████████████████████████
+wandb: 
+wandb: Run summary:
+wandb:                      Loss/iter 1000
+wandb:                     Loss/lossf 0.02991
+wandb:                       Loss/mfu 41.69691
+wandb:                     Loss/train 0.0598
+wandb:                       Loss/val 3.46993
+wandb:                  Timing/dt_avg 0.14245
+wandb:                 Timing/dt_iter 0.57647
+wandb:                  Timing/dt_tot 0.2849
+wandb:                 Timing/dtb_avg 0.27868
+wandb:                 Timing/dtb_tot 0.27868
+wandb:                 Timing/dtf_avg 0.00622
+wandb:                 Timing/dtf_tot 0.00622
+wandb:                    Timing/iter 999
+wandb:         Timing/samples_per_sec 13.87753
+wandb: Timing/samples_per_sec_per_gpu 1.73469
+wandb:            Timing/startup_time 11.20244
+wandb:          Timing/tokens_per_sec 909477.60841
+wandb:  Timing/tokens_per_sec_per_gpu 113684.70105
+wandb:                  Training/iter 999
+wandb:                  Training/loss 0.02991
+wandb:              Training/loss_tot 0.02991
+wandb:                    Training/lr 0.0006
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/awood/outputs/runs/pytorch/DDP/2024-11-19/22-48-37/wandb/offline-run-20241119_224844-pic5uwdu
+wandb: Find logs at: ./wandb/offline-run-20241119_224844-pic5uwdu/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
+(2024-08-08) (2024-08-08/base) [awood@sophia-gpu-17 wordplay]$ 
